@@ -27,16 +27,17 @@
 # lives in merge-queue-health-alert.yml.
 name: Merge Queue Daily Report
 
-on:
-  schedule:
-    - cron: "20 7 * * *" 
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: Print to the job summary instead of posting to Slack.
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: "20 7 * * *" 
+#   workflow_dispatch:
+#     inputs:
+#       dry_run:
+#         description: Print to the job summary instead of posting to Slack.
+#         type: boolean
+#         default: true
+# 
 permissions:
   # Naming any permission sets every other one to none, so each read this workflow
   # performs has to be declared explicitly:

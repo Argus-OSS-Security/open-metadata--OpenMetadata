@@ -50,22 +50,23 @@
 
 name: Playwright impact-map drift
 
-on:
-  pull_request_target:
-    types: [opened, synchronize, reopened, labeled, ready_for_review]
-    paths:
-      - 'openmetadata-ui/src/main/resources/ui/playwright/e2e/**/*.spec.ts'
-      - 'openmetadata-ui/src/main/resources/ui/src/**/*.ts'
-      - 'openmetadata-ui/src/main/resources/ui/src/**/*.tsx'
-      - '.github/scripts/generate_playwright_impact_map.py'
-      - '.github/playwright/impact-map.generated.json'
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: 'PR number to refresh the impact map for (optional)'
-        required: false
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened, synchronize, reopened, labeled, ready_for_review]
+#     paths:
+#       - 'openmetadata-ui/src/main/resources/ui/playwright/e2e/**/*.spec.ts'
+#       - 'openmetadata-ui/src/main/resources/ui/src/**/*.ts'
+#       - 'openmetadata-ui/src/main/resources/ui/src/**/*.tsx'
+#       - '.github/scripts/generate_playwright_impact_map.py'
+#       - '.github/playwright/impact-map.generated.json'
+#   workflow_dispatch:
+#     inputs:
+#       pr_number:
+#         description: 'PR number to refresh the impact map for (optional)'
+#         required: false
+#         type: string
+# 
 concurrency:
   group: playwright-impact-map-drift-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name != 'pull_request_target' || github.event.action != 'labeled' || (github.event.label.name == 'safe to test' && github.event.pull_request.head.repo.full_name != github.repository) }}

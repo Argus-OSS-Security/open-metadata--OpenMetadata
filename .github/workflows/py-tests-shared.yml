@@ -15,32 +15,33 @@ name: py-tests-shared
 # Callers own their `py-tests-status` job: moving it here renames the required check
 # context and breaks the ruleset.
 
-on:
-  workflow_call:
-    inputs:
-      compose-args:
-        description: Arguments forwarded to docker/run_local_docker.sh
-        required: true
-        type: string
-      artifact-prefix:
-        description: Prefix for uploaded test-result and diagnostic artifacts
-        required: true
-        type: string
-      test-profile:
-        description: TEST_PROFILE reported to classify_test_outcome.py for the integration lane
-        required: true
-        type: string
-      run-unit-tests:
-        description: Run the unit-test and static-check matrix
-        required: false
-        type: boolean
-        default: false
-      run-coverage:
-        description: Combine coverage and push results to Sonar
-        required: false
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       compose-args:
+#         description: Arguments forwarded to docker/run_local_docker.sh
+#         required: true
+#         type: string
+#       artifact-prefix:
+#         description: Prefix for uploaded test-result and diagnostic artifacts
+#         required: true
+#         type: string
+#       test-profile:
+#         description: TEST_PROFILE reported to classify_test_outcome.py for the integration lane
+#         required: true
+#         type: string
+#       run-unit-tests:
+#         description: Run the unit-test and static-check matrix
+#         required: false
+#         type: boolean
+#         default: false
+#       run-coverage:
+#         description: Combine coverage and push results to Sonar
+#         required: false
+#         type: boolean
+#         default: false
+# 
 env:
   # matrix can't use 'env'. When updating it, update it for both jobs.
   MAIN_PYTHON_VERSION: "3.10"

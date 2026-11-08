@@ -11,11 +11,12 @@
 
 name: SonarCloud Ingestion Nightly
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 2 * * *"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: "0 2 * * *"
+# 
 permissions:
   contents: read
 

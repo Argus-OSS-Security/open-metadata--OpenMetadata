@@ -10,14 +10,15 @@
 #  limitations under the License.
 
 name: monitor-slack-link
-on:
-  schedule:
-    # Run every 2 hours
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
-  
-
-# Grant least privilege permissions needed
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     # Run every 2 hours
+#     - cron: '0 */2 * * *'
+#   workflow_dispatch:
+#   
+# 
+# # Grant least privilege permissions needed
 permissions:
   contents: read # Needed for checkout and reading requirements.txt
 

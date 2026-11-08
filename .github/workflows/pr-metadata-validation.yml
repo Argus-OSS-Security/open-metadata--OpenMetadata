@@ -31,16 +31,17 @@ name: PR Metadata Validation
 # secret (a PAT or GitHub App token with `read:project` and read access to the
 # allowlisted repos) is required. Only PR / issue / project metadata is read
 # through the API — no untrusted checkout — so pull_request_target is safe here.
-on:
-  pull_request_target:
-    types: [opened, edited, reopened, synchronize, ready_for_review]
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: "PR number to validate"
-        required: true
-        type: number
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened, edited, reopened, synchronize, ready_for_review]
+#   workflow_dispatch:
+#     inputs:
+#       pr_number:
+#         description: "PR number to validate"
+#         required: true
+#         type: number
+# 
 permissions:
   contents: read
   issues: read

@@ -19,10 +19,11 @@ name: PR Auto Assign
 #     resolve through .github/teams.yml, rotated by PR number to spread the load.
 # A PR that already has an assignee is left alone. Only metadata is read through the API
 # (CODEOWNERS/teams.yml from the base commit, no checkout), so pull_request_target is safe.
-on:
-  pull_request_target:
-    types: [opened]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened]
+# 
 permissions:
   contents: read
   issues: write

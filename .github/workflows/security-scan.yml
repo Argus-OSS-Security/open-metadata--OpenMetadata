@@ -10,17 +10,18 @@
 #  limitations under the License.
 
 name: security-scan
-on:
-  schedule:
-    - cron: "0 0 */2 * *"
-  workflow_dispatch:
-    inputs:
-      SEND_SLACK_NOTIFICATION:
-        description: "Post results to Slack (uncheck for test runs)"
-        type: boolean
-        required: false
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: "0 0 */2 * *"
+#   workflow_dispatch:
+#     inputs:
+#       SEND_SLACK_NOTIFICATION:
+#         description: "Post results to Slack (uncheck for test runs)"
+#         type: boolean
+#         required: false
+#         default: true
+# 
 env:
   # Manual runs may opt out of Slack; schedule (where inputs are unset) always sends.
   # Explicit empty-check, since `||` would treat the string 'false' inconsistently when the

@@ -19,34 +19,35 @@
 # (ADR:2026-10-19-the-redis-cache-lane-gates-the-merge-queue).
 name: Integration Tests - PostgreSQL + Elasticsearch + Redis
 
-on:
-  merge_group:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "openmetadata-service/**"
-      - "openmetadata-integration-tests/**"
-      - "openmetadata-spec/pom.xml"
-      - "openmetadata-spec/src/**"
-      - "openmetadata-sdk/**"
-      - "openmetadata-shaded-deps/**"
-      - "openmetadata-k8s-operator/**"
-      - "openmetadata-mcp/**"
-      - "common/**"
-      - "pom.xml"
-      - "Makefile"
-      - "bootstrap/**"
-      - ".github/scripts/classify_test_outcome.py"
-      - ".github/workflows/integration-tests-postgres-elasticsearch-redis.yml"
-  # PRs trigger this workflow only so that `integration-tests-postgres-elasticsearch-redis` can be
-  # a required check: every job is skipped by its `if:`, so no runner starts, and GitHub counts a
-  # skipped required check as passing. With no PR trigger the check would hang at "Expected —
-  # waiting for status".
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - "openmetadata-service/**"
+#       - "openmetadata-integration-tests/**"
+#       - "openmetadata-spec/pom.xml"
+#       - "openmetadata-spec/src/**"
+#       - "openmetadata-sdk/**"
+#       - "openmetadata-shaded-deps/**"
+#       - "openmetadata-k8s-operator/**"
+#       - "openmetadata-mcp/**"
+#       - "common/**"
+#       - "pom.xml"
+#       - "Makefile"
+#       - "bootstrap/**"
+#       - ".github/scripts/classify_test_outcome.py"
+#       - ".github/workflows/integration-tests-postgres-elasticsearch-redis.yml"
+#   # PRs trigger this workflow only so that `integration-tests-postgres-elasticsearch-redis` can be
+#   # a required check: every job is skipped by its `if:`, so no runner starts, and GitHub counts a
+#   # skipped required check as passing. With no PR trigger the check would hang at "Expected —
+#   # waiting for status".
+#   pull_request:
+#     types: [opened, synchronize, reopened, ready_for_review]
+# 
 permissions:
   contents: read
   checks: write

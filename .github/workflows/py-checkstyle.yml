@@ -13,14 +13,15 @@ name: Python Checkstyle
 
 # read-write repo token
 # access to secrets
-on:
-  merge_group:
-  pull_request_target:
-    types: [labeled, opened, synchronize, reopened, ready_for_review]
-    paths-ignore:
-      - "openmetadata-ui/src/main/resources/ui/playwright/doc-generator/**"
-      - "openmetadata-ui/src/main/resources/ui/playwright/docs/**"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   pull_request_target:
+#     types: [labeled, opened, synchronize, reopened, ready_for_review]
+#     paths-ignore:
+#       - "openmetadata-ui/src/main/resources/ui/playwright/doc-generator/**"
+#       - "openmetadata-ui/src/main/resources/ui/playwright/docs/**"
+# 
 permissions:
   contents: read
 

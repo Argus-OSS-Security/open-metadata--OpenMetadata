@@ -35,44 +35,45 @@
 # ledger still belongs in the reusable so both callers stay aligned.
 
 name: Postgresql PR Playwright E2E Tests
-on:
-  merge_group:
-  # Daily full run on main. Merge groups upload no timing metrics, so this (plus manual
-  # full dispatches) is what feeds ci/playwright-timing and the full-suite timing
-  # artifacts PR planning downloads.
-  schedule:
-    - cron: '30 2 * * *'
-  workflow_dispatch:
-    inputs:
-      full_suite:
-        description: Run the complete duration-balanced suite
-        required: true
-        type: boolean
-        default: true
-      protocol:
-        description: Application protocol used by Playwright
-        required: true
-        type: choice
-        options:
-          - http
-          - h2
-        default: http
-      coarse_bundle:
-        description: Build the CI-only coarse Vite bundle
-        required: true
-        type: boolean
-        default: true
-  # Playwright runs only in the merge queue. PRs still trigger the workflow
-  # because `playwright-summary` is a required check: every job is skipped by
-  # its `if:` (no runner starts), and GitHub counts a skipped required check
-  # as passing. With no PR trigger the check would hang at "Expected — waiting".
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   # Daily full run on main. Merge groups upload no timing metrics, so this (plus manual
+#   # full dispatches) is what feeds ci/playwright-timing and the full-suite timing
+#   # artifacts PR planning downloads.
+#   schedule:
+#     - cron: '30 2 * * *'
+#   workflow_dispatch:
+#     inputs:
+#       full_suite:
+#         description: Run the complete duration-balanced suite
+#         required: true
+#         type: boolean
+#         default: true
+#       protocol:
+#         description: Application protocol used by Playwright
+#         required: true
+#         type: choice
+#         options:
+#           - http
+#           - h2
+#         default: http
+#       coarse_bundle:
+#         description: Build the CI-only coarse Vite bundle
+#         required: true
+#         type: boolean
+#         default: true
+#   # Playwright runs only in the merge queue. PRs still trigger the workflow
+#   # because `playwright-summary` is a required check: every job is skipped by
+#   # its `if:` (no runner starts), and GitHub counts a skipped required check
+#   # as passing. With no PR trigger the check would hang at "Expected — waiting".
+#   pull_request:
+#     types:
+#       - opened
+#       - synchronize
+#       - reopened
+#       - ready_for_review
+# 
 permissions:
   actions: read
   contents: read

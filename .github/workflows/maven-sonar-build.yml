@@ -11,21 +11,22 @@
 
 name: Maven SonarCloud CI
 
-on:
-  workflow_dispatch:
-  pull_request_target:
-    types: [labeled, opened, synchronize, reopened, ready_for_review]
-    paths:
-      - "openmetadata-service/**"
-      - "openmetadata-spec/src/main/resources/json/schema/**"
-      - "openmetadata-dist/**"
-      - "openmetadata-clients/**"
-      - "openmetadata-sdk/**"
-      - "common/**"
-      - "pom.xml"
-      - "Makefile"
-      - "bootstrap/**"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   pull_request_target:
+#     types: [labeled, opened, synchronize, reopened, ready_for_review]
+#     paths:
+#       - "openmetadata-service/**"
+#       - "openmetadata-spec/src/main/resources/json/schema/**"
+#       - "openmetadata-dist/**"
+#       - "openmetadata-clients/**"
+#       - "openmetadata-sdk/**"
+#       - "common/**"
+#       - "pom.xml"
+#       - "Makefile"
+#       - "bootstrap/**"
+# 
 permissions:
   contents: read
   checks: write

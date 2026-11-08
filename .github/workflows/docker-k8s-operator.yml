@@ -10,16 +10,17 @@
 #  limitations under the License.
 
 name: docker-k8s-operator release app
-on:
-  workflow_dispatch:
-    inputs:
-      docker_release_tag:
-        description: "K8s Operator Docker Image Tag"
-        required: true
-      push_latest_tag_to_release:
-        description: "Do you want to update docker image latest tag as well ?"
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       docker_release_tag:
+#         description: "K8s Operator Docker Image Tag"
+#         required: true
+#       push_latest_tag_to_release:
+#         description: "Do you want to update docker image latest tag as well ?"
+#         type: boolean
+# 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true

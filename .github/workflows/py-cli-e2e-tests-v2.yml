@@ -20,14 +20,15 @@
 # schedule can be added after the connector suites are consistently green.
 
 name: py-cli-e2e-tests-v2
-on:
-  workflow_dispatch:
-    inputs:
-      connectors:
-        description: "Connectors to run (JSON array)"
-        required: true
-        default: '["mysql", "postgres", "bigquery", "oracle", "snowflake", "mssql"]'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       connectors:
+#         description: "Connectors to run (JSON array)"
+#         required: true
+#         default: '["mysql", "postgres", "bigquery", "oracle", "snowflake", "mssql"]'
+# 
 permissions:
   id-token: write
   contents: read

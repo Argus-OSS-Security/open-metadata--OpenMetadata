@@ -10,20 +10,21 @@
 #  limitations under the License.
 
 name: py-cli-e2e-tests
-on:
-  schedule:
-    - cron:  '0 0 * * *'
-  workflow_dispatch:
-    inputs:
-      e2e-tests:
-        description: "E2E Tests to run"
-        required: True
-        default: '["bigquery", "dbt_redshift", "metabase", "mssql", "mysql", "redash", "snowflake", "tableau", "python-unittests", "python-integration", "redshift", "quicksight", "datalake_s3", "postgres", "oracle", "athena", "bigquery_multiple_project", "exasol", "powerbi"]'
-      debug:
-        description: "If Debugging the Pipeline, Slack and Sonar events won't be triggered [default, true or false]. Default will trigger only on main branch."
-        required: False
-        default: "default"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron:  '0 0 * * *'
+#   workflow_dispatch:
+#     inputs:
+#       e2e-tests:
+#         description: "E2E Tests to run"
+#         required: True
+#         default: '["bigquery", "dbt_redshift", "metabase", "mssql", "mysql", "redash", "snowflake", "tableau", "python-unittests", "python-integration", "redshift", "quicksight", "datalake_s3", "postgres", "oracle", "athena", "bigquery_multiple_project", "exasol", "powerbi"]'
+#       debug:
+#         description: "If Debugging the Pipeline, Slack and Sonar events won't be triggered [default, true or false]. Default will trigger only on main branch."
+#         required: False
+#         default: "default"
+# 
 env:
   DEBUG: "${{ (inputs.debug == 'default' && github.ref == 'refs/heads/main' && 'false') || (inputs.debug == 'default' && github.ref != 'refs/heads/main' && 'true') || inputs.debug  || 'false' }}"
 

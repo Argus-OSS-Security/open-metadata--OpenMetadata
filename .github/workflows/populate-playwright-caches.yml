@@ -82,14 +82,15 @@
 # key populates a cache nobody restores. Update both files together.
 name: Populate Playwright CI caches
 
-on:
-  schedule:
-    - cron: "0 */6 * * *"
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: "0 */6 * * *"
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+# 
 permissions:
   contents: read
 

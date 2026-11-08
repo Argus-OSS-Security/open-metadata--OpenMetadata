@@ -20,25 +20,26 @@
 # most 48h.
 name: Playwright Flaky Daily Report
 
-on:
-  schedule:
-    # 09:00 IST.
-    - cron: "30 3 * * *"
-  workflow_dispatch:
-    inputs:
-      since:
-        description: "Window start, UTC ISO (2026-09-30 or 2026-09-30T06:00). Empty means 24h before `until`. Max window 48h."
-        type: string
-        default: ""
-      until:
-        description: "Window end, UTC ISO. Empty means the last full hour, minus one hour, so runs in the window have finished."
-        type: string
-        default: ""
-      post_to_slack:
-        description: "Post the report to #pw-health. Off = scan only (job summary + HTML artifact)."
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     # 09:00 IST.
+#     - cron: "30 3 * * *"
+#   workflow_dispatch:
+#     inputs:
+#       since:
+#         description: "Window start, UTC ISO (2026-09-30 or 2026-09-30T06:00). Empty means 24h before `until`. Max window 48h."
+#         type: string
+#         default: ""
+#       until:
+#         description: "Window end, UTC ISO. Empty means the last full hour, minus one hour, so runs in the window have finished."
+#         type: string
+#         default: ""
+#       post_to_slack:
+#         description: "Post the report to #pw-health. Off = scan only (job summary + HTML artifact)."
+#         type: boolean
+#         default: true
+# 
 permissions:
   # Naming any permission sets every other one to none:
   #   actions  — list merge-group runs, their jobs, and failed shards' results JSON

@@ -11,14 +11,15 @@
 
 name: Validate Docker Compose Quickstart
 
-on:
-  workflow_dispatch:
-  pull_request:
-    paths:
-      - 'docker/docker-compose-quickstart/**'
-      - '.github/workflows/validate-docker-compose-quickstart.yml'
-      - '.github/actions/validate-omd-docker-compose/**'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   pull_request:
+#     paths:
+#       - 'docker/docker-compose-quickstart/**'
+#       - '.github/workflows/validate-docker-compose-quickstart.yml'
+#       - '.github/actions/validate-omd-docker-compose/**'
+# 
 permissions:
   contents: read
 

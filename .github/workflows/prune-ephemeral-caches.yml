@@ -51,21 +51,22 @@
 # read as "every queue ref is dead".
 name: Prune dead merge-queue refs
 
-on:
-  merge_group:
-  # pull_request_target, not pull_request: fork PRs get a read-only token and
-  # could not cancel. Safe only while nothing checks out or reads PR content.
-  pull_request_target:
-    types: [dequeued]
-  schedule:
-    - cron: "*/30 * * * *"
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: List what would be deleted or cancelled without acting.
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   # pull_request_target, not pull_request: fork PRs get a read-only token and
+#   # could not cancel. Safe only while nothing checks out or reads PR content.
+#   pull_request_target:
+#     types: [dequeued]
+#   schedule:
+#     - cron: "*/30 * * * *"
+#   workflow_dispatch:
+#     inputs:
+#       dry_run:
+#         description: List what would be deleted or cancelled without acting.
+#         type: boolean
+#         default: false
+# 
 permissions:
   actions: write
   contents: read

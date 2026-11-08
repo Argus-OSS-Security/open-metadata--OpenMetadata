@@ -11,34 +11,35 @@
 
 name: Auto-revert failing commit on release branch
 
-on:
-  workflow_run:
-    workflows: ["Release Branch Validate"]
-    types: [completed]
-  # Manual shim so the revert logic can be exercised on a throwaway release
-  # branch (e.g. 9.9.9) before the workflow_run trigger goes live on main.
-  workflow_dispatch:
-    inputs:
-      head_branch:
-        description: "Release branch to act on (e.g. 9.9.9)"
-        required: true
-      head_sha:
-        description: "Commit SHA to treat as the failing tip"
-        required: true
-      workflow_name:
-        description: "Name of the workflow to attribute the failure to"
-        required: false
-        default: "Release Branch Validate (simulated)"
-      run_url:
-        description: "URL to attribute the failure to (defaults to this run)"
-        required: false
-        default: ""
-      dry_run:
-        description: "Skip git push and Slack post; log the plan only"
-        required: true
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_run:
+#     workflows: ["Release Branch Validate"]
+#     types: [completed]
+#   # Manual shim so the revert logic can be exercised on a throwaway release
+#   # branch (e.g. 9.9.9) before the workflow_run trigger goes live on main.
+#   workflow_dispatch:
+#     inputs:
+#       head_branch:
+#         description: "Release branch to act on (e.g. 9.9.9)"
+#         required: true
+#       head_sha:
+#         description: "Commit SHA to treat as the failing tip"
+#         required: true
+#       workflow_name:
+#         description: "Name of the workflow to attribute the failure to"
+#         required: false
+#         default: "Release Branch Validate (simulated)"
+#       run_url:
+#         description: "URL to attribute the failure to (defaults to this run)"
+#         required: false
+#         default: ""
+#       dry_run:
+#         description: "Skip git push and Slack post; log the plan only"
+#         required: true
+#         type: boolean
+#         default: true
+# 
 permissions:
   contents: write
 

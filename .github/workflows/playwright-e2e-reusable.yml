@@ -17,135 +17,136 @@
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
 name: Playwright E2E (reusable)
-on:
-  workflow_call:
-    inputs:
-      database:
-        description: Database flavour to seed and exercise (postgresql | mysql).
-        required: true
-        type: string
-      profile:
-        description: >-
-          Shadow-gate profile name (also used to disambiguate the shadow-gate
-          artifact). Callers pass `postgresql-pr`, `mysql-nightly`, etc.
-        required: true
-        type: string
-      workflow_filename:
-        description: >-
-          Caller workflow filename used by the shard planner to look up recent
-          full-suite timing artifacts (e.g. `playwright-postgresql-e2e.yml`).
-        required: true
-        type: string
-      ref:
-        description: >-
-          Git ref to check out for every test-path job. Set by branch-runner
-          callers so a workflow dispatched from `main` can still exercise a
-          release branch. Empty (default) falls back to `github.sha` for PRs
-          and merge-queue runs, which is what the PR pipeline wants.
-          NOTE: the summary job's checkout intentionally ignores this input
-          and stays on `github.sha` so a compromised release branch cannot
-          rewrite `render_playwright_summary.cjs`; the timing-baseline
-          refresh job stays on `main` for the same reason.
-        required: false
-        type: string
-        default: ""
-      full_suite:
-        description: Run the complete duration-balanced suite.
-        required: false
-        type: boolean
-        default: true
-      protocol:
-        description: Application protocol used by Playwright (http | h2).
-        required: false
-        type: string
-        default: http
-      coarse_bundle:
-        description: Build the CI-only coarse Vite bundle.
-        required: false
-        type: boolean
-        default: true
-      warm_caches_only:
-        description: >-
-          Build and seed the pipeline's cache assets, then stop before the test
-          shards. Used by populate-playwright-caches.yml's warm-fixture job
-          on `main` so the distribution / golden fixture / ingestion image land
-          in the DEFAULT BRANCH cache scope — the only scope every merge-queue
-          and PR run can restore from. See that workflow's header for the
-          scoping mechanics.
-        required: false
-        type: boolean
-        default: false
-      retries:
-        description: >-
-          Playwright per-test retry count, exported to playwright.config.ts as
-          PLAYWRIGHT_RETRIES on the shard test step only (the fixture populator
-          and bundle-smoke keep the config default). The default matches the
-          config's CI default of 1; release-branch nightlies raise it to 2.
-        required: false
-        type: number
-        default: 1
-      send_slack_notification:
-        description: Post a Slack summary once the run finishes.
-        required: false
-        type: boolean
-        default: false
-      slack_run_title:
-        description: Title shown in the Slack summary (only used when send_slack_notification is true).
-        required: false
-        type: string
-        default: ""
-    # Outputs the caller needs to reproduce the summary/baseline-refresh gate
-    # jobs at the caller's own top level (so branch-protection can require an
-    # UN-PREFIXED `playwright-summary` check — reusable jobs otherwise appear
-    # as `<caller-job> / playwright-summary` and never satisfy the rule).
-    outputs:
-      gate_result:
-        description: Aggregate result of the gate job (`success`, `failure`, `cancelled`, `skipped`).
-        value: ${{ jobs.gate.result }}
-      gate_should_run:
-        description: gate's `should_run` decision (`true`/`false`).
-        value: ${{ jobs.gate.outputs.should_run }}
-      check_changes_result:
-        description: Aggregate result of check-changes.
-        value: ${{ jobs.check-changes.result }}
-      check_changes_e2e:
-        description: dorny/paths-filter e2e flag.
-        value: ${{ jobs.check-changes.outputs.e2e }}
-      check_changes_docker_compose:
-        description: dorny/paths-filter docker-compose flag.
-        value: ${{ jobs.check-changes.outputs.docker-compose }}
-      cache_keys_result:
-        description: Aggregate result of cache-keys.
-        value: ${{ jobs.cache-keys.result }}
-      build_result:
-        description: Aggregate result of build.
-        value: ${{ jobs.build.result }}
-      detect_changes_result:
-        description: Aggregate result of detect-changes.
-        value: ${{ jobs.detect-changes.result }}
-      detect_changes_mode:
-        description: Selected execution mode (`full` or `targeted`).
-        value: ${{ jobs.detect-changes.outputs.mode }}
-      plan_playwright_result:
-        description: Aggregate result of plan-playwright.
-        value: ${{ jobs.plan-playwright.result }}
-      plan_playwright_matrix:
-        description: JSON matrix produced by the shard planner.
-        value: ${{ jobs.plan-playwright.outputs.matrix }}
-      restore_playwright_fixture_result:
-        description: Aggregate result of restore-playwright-fixture.
-        value: ${{ jobs.restore-playwright-fixture.result }}
-      prepare_playwright_fixture_result:
-        description: Aggregate result of prepare-playwright-fixture.
-        value: ${{ jobs.prepare-playwright-fixture.result }}
-      playwright_ci_result:
-        description: Aggregate result of the sharded playwright-ci job.
-        value: ${{ jobs.playwright-ci.result }}
-    # No `secrets:` block: declaring it turns the reusable's secret access into
-    # a closed set. Callers use `secrets: inherit`, which requires the block
-    # to be absent so every caller-scoped secret (TEST_*, PLAYWRIGHT_*,
-    # E2E_SLACK_BOT_OAUTH_TOKEN, GITHUB_TOKEN) flows through unchanged.
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       database:
+#         description: Database flavour to seed and exercise (postgresql | mysql).
+#         required: true
+#         type: string
+#       profile:
+#         description: >-
+#           Shadow-gate profile name (also used to disambiguate the shadow-gate
+#           artifact). Callers pass `postgresql-pr`, `mysql-nightly`, etc.
+#         required: true
+#         type: string
+#       workflow_filename:
+#         description: >-
+#           Caller workflow filename used by the shard planner to look up recent
+#           full-suite timing artifacts (e.g. `playwright-postgresql-e2e.yml`).
+#         required: true
+#         type: string
+#       ref:
+#         description: >-
+#           Git ref to check out for every test-path job. Set by branch-runner
+#           callers so a workflow dispatched from `main` can still exercise a
+#           release branch. Empty (default) falls back to `github.sha` for PRs
+#           and merge-queue runs, which is what the PR pipeline wants.
+#           NOTE: the summary job's checkout intentionally ignores this input
+#           and stays on `github.sha` so a compromised release branch cannot
+#           rewrite `render_playwright_summary.cjs`; the timing-baseline
+#           refresh job stays on `main` for the same reason.
+#         required: false
+#         type: string
+#         default: ""
+#       full_suite:
+#         description: Run the complete duration-balanced suite.
+#         required: false
+#         type: boolean
+#         default: true
+#       protocol:
+#         description: Application protocol used by Playwright (http | h2).
+#         required: false
+#         type: string
+#         default: http
+#       coarse_bundle:
+#         description: Build the CI-only coarse Vite bundle.
+#         required: false
+#         type: boolean
+#         default: true
+#       warm_caches_only:
+#         description: >-
+#           Build and seed the pipeline's cache assets, then stop before the test
+#           shards. Used by populate-playwright-caches.yml's warm-fixture job
+#           on `main` so the distribution / golden fixture / ingestion image land
+#           in the DEFAULT BRANCH cache scope — the only scope every merge-queue
+#           and PR run can restore from. See that workflow's header for the
+#           scoping mechanics.
+#         required: false
+#         type: boolean
+#         default: false
+#       retries:
+#         description: >-
+#           Playwright per-test retry count, exported to playwright.config.ts as
+#           PLAYWRIGHT_RETRIES on the shard test step only (the fixture populator
+#           and bundle-smoke keep the config default). The default matches the
+#           config's CI default of 1; release-branch nightlies raise it to 2.
+#         required: false
+#         type: number
+#         default: 1
+#       send_slack_notification:
+#         description: Post a Slack summary once the run finishes.
+#         required: false
+#         type: boolean
+#         default: false
+#       slack_run_title:
+#         description: Title shown in the Slack summary (only used when send_slack_notification is true).
+#         required: false
+#         type: string
+#         default: ""
+#     # Outputs the caller needs to reproduce the summary/baseline-refresh gate
+#     # jobs at the caller's own top level (so branch-protection can require an
+#     # UN-PREFIXED `playwright-summary` check — reusable jobs otherwise appear
+#     # as `<caller-job> / playwright-summary` and never satisfy the rule).
+#     outputs:
+#       gate_result:
+#         description: Aggregate result of the gate job (`success`, `failure`, `cancelled`, `skipped`).
+#         value: ${{ jobs.gate.result }}
+#       gate_should_run:
+#         description: gate's `should_run` decision (`true`/`false`).
+#         value: ${{ jobs.gate.outputs.should_run }}
+#       check_changes_result:
+#         description: Aggregate result of check-changes.
+#         value: ${{ jobs.check-changes.result }}
+#       check_changes_e2e:
+#         description: dorny/paths-filter e2e flag.
+#         value: ${{ jobs.check-changes.outputs.e2e }}
+#       check_changes_docker_compose:
+#         description: dorny/paths-filter docker-compose flag.
+#         value: ${{ jobs.check-changes.outputs.docker-compose }}
+#       cache_keys_result:
+#         description: Aggregate result of cache-keys.
+#         value: ${{ jobs.cache-keys.result }}
+#       build_result:
+#         description: Aggregate result of build.
+#         value: ${{ jobs.build.result }}
+#       detect_changes_result:
+#         description: Aggregate result of detect-changes.
+#         value: ${{ jobs.detect-changes.result }}
+#       detect_changes_mode:
+#         description: Selected execution mode (`full` or `targeted`).
+#         value: ${{ jobs.detect-changes.outputs.mode }}
+#       plan_playwright_result:
+#         description: Aggregate result of plan-playwright.
+#         value: ${{ jobs.plan-playwright.result }}
+#       plan_playwright_matrix:
+#         description: JSON matrix produced by the shard planner.
+#         value: ${{ jobs.plan-playwright.outputs.matrix }}
+#       restore_playwright_fixture_result:
+#         description: Aggregate result of restore-playwright-fixture.
+#         value: ${{ jobs.restore-playwright-fixture.result }}
+#       prepare_playwright_fixture_result:
+#         description: Aggregate result of prepare-playwright-fixture.
+#         value: ${{ jobs.prepare-playwright-fixture.result }}
+#       playwright_ci_result:
+#         description: Aggregate result of the sharded playwright-ci job.
+#         value: ${{ jobs.playwright-ci.result }}
+#     # No `secrets:` block: declaring it turns the reusable's secret access into
+#     # a closed set. Callers use `secrets: inherit`, which requires the block
+#     # to be absent so every caller-scoped secret (TEST_*, PLAYWRIGHT_*,
+#     # E2E_SLACK_BOT_OAUTH_TOKEN, GITHUB_TOKEN) flows through unchanged.
+# 
 permissions:
   actions: read
   contents: read

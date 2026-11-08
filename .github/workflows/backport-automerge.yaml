@@ -27,16 +27,17 @@ run-name: "Auto-merge check for ${{ inputs.pr && format('PR #{0}', inputs.pr) ||
 # never merged blind; the manual dispatch below covers that case.
 
 # yamllint disable-line rule:truthy
-on:
-  check_suite:
-    types: [completed]
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: "Backport PR number to re-evaluate"
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   check_suite:
+#     types: [completed]
+#   workflow_dispatch:
+#     inputs:
+#       pr:
+#         description: "Backport PR number to re-evaluate"
+#         required: true
+#         type: string
+# 
 permissions:
   contents: write
   pull-requests: write

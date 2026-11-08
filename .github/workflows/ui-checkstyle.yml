@@ -11,27 +11,28 @@
 
 name: UI Checkstyle
 
-on:
-  merge_group:
-  # Note: paths filter removed — the workflow always triggers so that the
-  # required status check (report) always completes. Path filtering is handled
-  # inside the workflow via dorny/paths-filter so PRs without UI changes skip
-  # the expensive jobs while still reporting a passing status.
-  pull_request_target:
-    # main only. Release branches carry their own ui-checkstyle.yml and must be
-    # validated by it: this workflow assumes tooling (eslint-pr-report,
-    # tw-audit, tw-deprecation-guard, core-components check-i18n-all) that older
-    # branches do not have, so running it against them fails on MODULE_NOT_FOUND
-    # before the PR's code is ever examined.
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-      - labeled
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   # Note: paths filter removed — the workflow always triggers so that the
+#   # required status check (report) always completes. Path filtering is handled
+#   # inside the workflow via dorny/paths-filter so PRs without UI changes skip
+#   # the expensive jobs while still reporting a passing status.
+#   pull_request_target:
+#     # main only. Release branches carry their own ui-checkstyle.yml and must be
+#     # validated by it: this workflow assumes tooling (eslint-pr-report,
+#     # tw-audit, tw-deprecation-guard, core-components check-i18n-all) that older
+#     # branches do not have, so running it against them fails on MODULE_NOT_FOUND
+#     # before the PR's code is ever examined.
+#     branches:
+#       - main
+#     types:
+#       - opened
+#       - synchronize
+#       - reopened
+#       - ready_for_review
+#       - labeled
+# 
 permissions:
   contents: read
 

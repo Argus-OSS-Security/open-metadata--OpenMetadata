@@ -11,13 +11,14 @@
 
 name: Publish PostgreSQL Playwright PR Comment
 
-on:
-  workflow_run:
-    workflows:
-      - Postgresql PR Playwright E2E Tests
-    types:
-      - completed
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_run:
+#     workflows:
+#       - Postgresql PR Playwright E2E Tests
+#     types:
+#       - completed
+# 
 permissions:
   actions: read
   contents: read

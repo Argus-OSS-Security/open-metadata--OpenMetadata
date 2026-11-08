@@ -12,35 +12,36 @@ name: Harness Integrity
 # .github/workflows/, so it does not execute in this monorepo), and these checks span
 # repo-root files it cannot reach. It also subsumes the docs/generated freshness check.
 
-on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'CLAUDE.md'
-      - 'AGENTS.md'
-      - 'ARCHITECTURE.md'
-      - 'docs/**'
-      - '.claude/rules/**'
-      - '.claude/skills/**'
-      - '.agents/skills/**'
-      - 'skills/**'
-      - 'Makefile'
-      - 'ingestion/Makefile'
-      - 'openmetadata-ui/src/main/resources/ui/package.json'
-      - 'openmetadata-ui-core-components/src/main/resources/ui/package.json'
-      - 'scripts/harness/**'
-      - 'scripts/generate_entity_index.py'
-      - 'scripts/generate_api_reference.py'
-      # freshness (check 6) sources:
-      - 'openmetadata-spec/src/main/resources/json/schema/entity/**'
-      - 'openmetadata-service/src/main/java/org/openmetadata/service/resources/**'
-      # java-impact-map (check 8) sources: a new IT must land in a bucket of the impact map.
-      - 'openmetadata-integration-tests/src/test/java/**'
-      - 'openmetadata-integration-tests/pom.xml'
-      - '.github/java-tests/**'
-      - '.github/scripts/plan_local_java_tests.py'
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     branches: [main]
+#     paths:
+#       - 'CLAUDE.md'
+#       - 'AGENTS.md'
+#       - 'ARCHITECTURE.md'
+#       - 'docs/**'
+#       - '.claude/rules/**'
+#       - '.claude/skills/**'
+#       - '.agents/skills/**'
+#       - 'skills/**'
+#       - 'Makefile'
+#       - 'ingestion/Makefile'
+#       - 'openmetadata-ui/src/main/resources/ui/package.json'
+#       - 'openmetadata-ui-core-components/src/main/resources/ui/package.json'
+#       - 'scripts/harness/**'
+#       - 'scripts/generate_entity_index.py'
+#       - 'scripts/generate_api_reference.py'
+#       # freshness (check 6) sources:
+#       - 'openmetadata-spec/src/main/resources/json/schema/entity/**'
+#       - 'openmetadata-service/src/main/java/org/openmetadata/service/resources/**'
+#       # java-impact-map (check 8) sources: a new IT must land in a bucket of the impact map.
+#       - 'openmetadata-integration-tests/src/test/java/**'
+#       - 'openmetadata-integration-tests/pom.xml'
+#       - '.github/java-tests/**'
+#       - '.github/scripts/plan_local_java_tests.py'
+#   workflow_dispatch:
+# 
 permissions:
   contents: read
 

@@ -37,45 +37,46 @@
 
 name: JavaUIIT Integration Tests
 
-on:
-  workflow_dispatch:
-    inputs:
-      includeSsoBootstrap:
-        description: 'Also run @Tag("sso-bootstrap") UIITs (slower; second OM lifecycle)'
-        required: false
-        type: boolean
-        default: false
-      simpleReindexTables:
-        description: 'SimpleReindexTriggerUIIT table cohort size'
-        required: false
-        type: string
-        default: '5000'
-      simpleReindexTopics:
-        description: 'SimpleReindexTriggerUIIT topic cohort size'
-        required: false
-        type: string
-        default: '1500'
-      simpleReindexDashboards:
-        description: 'SimpleReindexTriggerUIIT dashboard cohort size'
-        required: false
-        type: string
-        default: '1500'
-      simpleReindexPipelines:
-        description: 'SimpleReindexTriggerUIIT pipeline cohort size'
-        required: false
-        type: string
-        default: '2000'
-      searchAvailableTables:
-        description: 'SearchAvailableDuringReindexUIIT table cohort size'
-        required: false
-        type: string
-        default: '5000'
-      reindexTimeoutMin:
-        description: 'Per-run reindex completion/acceptance timeout (minutes) for ui-it & search-it'
-        required: false
-        type: string
-        default: '60'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       includeSsoBootstrap:
+#         description: 'Also run @Tag("sso-bootstrap") UIITs (slower; second OM lifecycle)'
+#         required: false
+#         type: boolean
+#         default: false
+#       simpleReindexTables:
+#         description: 'SimpleReindexTriggerUIIT table cohort size'
+#         required: false
+#         type: string
+#         default: '5000'
+#       simpleReindexTopics:
+#         description: 'SimpleReindexTriggerUIIT topic cohort size'
+#         required: false
+#         type: string
+#         default: '1500'
+#       simpleReindexDashboards:
+#         description: 'SimpleReindexTriggerUIIT dashboard cohort size'
+#         required: false
+#         type: string
+#         default: '1500'
+#       simpleReindexPipelines:
+#         description: 'SimpleReindexTriggerUIIT pipeline cohort size'
+#         required: false
+#         type: string
+#         default: '2000'
+#       searchAvailableTables:
+#         description: 'SearchAvailableDuringReindexUIIT table cohort size'
+#         required: false
+#         type: string
+#         default: '5000'
+#       reindexTimeoutMin:
+#         description: 'Per-run reindex completion/acceptance timeout (minutes) for ui-it & search-it'
+#         required: false
+#         type: string
+#         default: '60'
+# 
 permissions:
   contents: read
   checks: write

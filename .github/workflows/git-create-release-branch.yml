@@ -1,15 +1,16 @@
 name: Create Release Branches
 run-name: Create Release Branch ${{ inputs.release_branch_name }}
-on:
-  workflow_dispatch:
-    inputs:
-      release_branch_name:
-        description: "Github Release Branch Name"
-        required: true
-      base_branch_name:
-        description: "Base Branch for Release Branch"
-        required: true
-        default: "main"
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       release_branch_name:
+#         description: "Github Release Branch Name"
+#         required: true
+#       base_branch_name:
+#         description: "Base Branch for Release Branch"
+#         required: true
+#         default: "main"
 permissions:
   contents: write
 jobs:

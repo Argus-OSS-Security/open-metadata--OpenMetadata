@@ -28,24 +28,25 @@
 # fine here: head_entry_age is cumulative, so a missed hour does not lose the signal.
 name: Merge Queue Health Alert
 
-on:
-  schedule:
-    - cron: "7 * * * *"
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: Print to the job summary instead of posting to Slack.
-        type: boolean
-        default: true
-      degraded_hours:
-        description: Head-entry age that counts as degraded.
-        type: string
-        default: "5"
-      severe_hours:
-        description: Head-entry age that counts as severe.
-        type: string
-        default: "24"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: "7 * * * *"
+#   workflow_dispatch:
+#     inputs:
+#       dry_run:
+#         description: Print to the job summary instead of posting to Slack.
+#         type: boolean
+#         default: true
+#       degraded_hours:
+#         description: Head-entry age that counts as degraded.
+#         type: string
+#         default: "5"
+#       severe_hours:
+#         description: Head-entry age that counts as severe.
+#         type: string
+#         default: "24"
+# 
 permissions:
   # Naming any permission sets every other one to none. The alert reads the live queue
   # and a 24h slice of PR timeline history for the realized-throughput figure, so PR

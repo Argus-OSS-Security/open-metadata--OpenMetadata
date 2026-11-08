@@ -19,38 +19,39 @@
 # should be made in the reusable so postgres and mysql stay aligned.
 
 name: MySQL Playwright E2E (release branch)
-on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: Release branch to check out and test against (e.g. `release-1.9`, `main`).
-        required: true
-        type: string
-        default: main
-      full_suite:
-        description: Run the complete duration-balanced suite
-        required: true
-        type: boolean
-        default: true
-      protocol:
-        description: Application protocol used by Playwright
-        required: true
-        type: choice
-        options:
-          - http
-          - h2
-        default: http
-      coarse_bundle:
-        description: Build the CI-only coarse Vite bundle
-        required: true
-        type: boolean
-        default: true
-      send_slack_notification:
-        description: Post the run summary to the E2E Slack channel
-        required: false
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       branch:
+#         description: Release branch to check out and test against (e.g. `release-1.9`, `main`).
+#         required: true
+#         type: string
+#         default: main
+#       full_suite:
+#         description: Run the complete duration-balanced suite
+#         required: true
+#         type: boolean
+#         default: true
+#       protocol:
+#         description: Application protocol used by Playwright
+#         required: true
+#         type: choice
+#         options:
+#           - http
+#           - h2
+#         default: http
+#       coarse_bundle:
+#         description: Build the CI-only coarse Vite bundle
+#         required: true
+#         type: boolean
+#         default: true
+#       send_slack_notification:
+#         description: Post the run summary to the E2E Slack channel
+#         required: false
+#         type: boolean
+#         default: false
+# 
 permissions:
   actions: read
   contents: read

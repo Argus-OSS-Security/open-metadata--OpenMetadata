@@ -11,37 +11,38 @@
 
 name: Integration Tests - MySQL + Elasticsearch
 
-on:
-  merge_group:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "openmetadata-service/**"
-      - "openmetadata-integration-tests/**"
-      - "openmetadata-spec/pom.xml"
-      - "openmetadata-spec/src/**"
-      - "openmetadata-sdk/**"
-      - "openmetadata-shaded-deps/**"
-      - "openmetadata-k8s-operator/**"
-      - "openmetadata-mcp/**"
-      - "common/**"
-      - "pom.xml"
-      - "Makefile"
-      - "bootstrap/**"
-      - "docker/rdf-store/**"
-      - ".github/scripts/classify_test_outcome.py"
-      - ".github/workflows/integration-tests-mysql-elasticsearch.yml"
-  # Integration tests run in the merge queue (plus main pushes and manual dispatch), not on
-  # PRs: before review, `make java_affected_run` runs the ITs a PR impacts on the author's
-  # machine. PRs still trigger this workflow because `integration-tests-mysql-elasticsearch` is a
-  # required check: every job is skipped by its `if:`, so no runner starts, and GitHub counts a
-  # skipped required check as passing. With no PR trigger the check would hang at "Expected —
-  # waiting for status".
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - "openmetadata-service/**"
+#       - "openmetadata-integration-tests/**"
+#       - "openmetadata-spec/pom.xml"
+#       - "openmetadata-spec/src/**"
+#       - "openmetadata-sdk/**"
+#       - "openmetadata-shaded-deps/**"
+#       - "openmetadata-k8s-operator/**"
+#       - "openmetadata-mcp/**"
+#       - "common/**"
+#       - "pom.xml"
+#       - "Makefile"
+#       - "bootstrap/**"
+#       - "docker/rdf-store/**"
+#       - ".github/scripts/classify_test_outcome.py"
+#       - ".github/workflows/integration-tests-mysql-elasticsearch.yml"
+#   # Integration tests run in the merge queue (plus main pushes and manual dispatch), not on
+#   # PRs: before review, `make java_affected_run` runs the ITs a PR impacts on the author's
+#   # machine. PRs still trigger this workflow because `integration-tests-mysql-elasticsearch` is a
+#   # required check: every job is skipped by its `if:`, so no runner starts, and GitHub counts a
+#   # skipped required check as passing. With no PR trigger the check would hang at "Expected —
+#   # waiting for status".
+#   pull_request:
+#     types: [opened, synchronize, reopened, ready_for_review]
+# 
 permissions:
   contents: read
   checks: write

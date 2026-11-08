@@ -1,13 +1,14 @@
 name: CodeQL Advanced
 
-on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch to run the workflow on"
-        required: true
-        default: "main"
-        type: string
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       branch:
+#         description: "Branch to run the workflow on"
+#         required: true
+#         default: "main"
+#         type: string
 jobs:
   analyze:
     runs-on: ubuntu-latest

@@ -26,22 +26,23 @@
 # ADR:2026-10-13-merge-queue-conflicts-are-labelled-and-main-conflicts-evicted
 name: Merge Queue Dequeue Report
 
-on:
-  pull_request_target:
-    types: [dequeued, enqueued, synchronize]
-  push:
-    branches: [main]
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: PR number to report on
-        required: true
-        type: number
-      dry_run:
-        description: Print to the job summary instead of commenting on the PR
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [dequeued, enqueued, synchronize]
+#   push:
+#     branches: [main]
+#   workflow_dispatch:
+#     inputs:
+#       pr:
+#         description: PR number to report on
+#         required: true
+#         type: number
+#       dry_run:
+#         description: Print to the job summary instead of commenting on the PR
+#         type: boolean
+#         default: true
+# 
 permissions:
   checks: read
   contents: read

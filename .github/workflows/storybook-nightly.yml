@@ -25,18 +25,19 @@
 
 name: Storybook nightly build
 
-on:
-  schedule:
-    # 02:00 UTC every day.
-    - cron: '0 2 * * *'
-  # Allow a one-click manual run from the Actions tab.
-  workflow_dispatch:
-    inputs:
-      push_image:
-        description: "Push the built image to Docker Hub?"
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     # 02:00 UTC every day.
+#     - cron: '0 2 * * *'
+#   # Allow a one-click manual run from the Actions tab.
+#   workflow_dispatch:
+#     inputs:
+#       push_image:
+#         description: "Push the built image to Docker Hub?"
+#         type: boolean
+#         default: true
+# 
 concurrency:
   group: storybook-nightly
   cancel-in-progress: true

@@ -27,16 +27,17 @@ run-name: Backport PR #${{ github.event.pull_request.number }} to release branch
 # Same channel maven-build-collate.yml already uses in this direction.
 
 # yamllint disable-line rule:truthy
-on:
-  # pull_request_target, not pull_request: this repository takes fork PRs, and a
-  # `pull_request` run from a fork cannot read the secrets this needs. The usual
-  # danger of pull_request_target does not apply — this only fires after a
-  # merge and never checks out or executes any PR code at all.
-  pull_request_target:
-    types: [closed]
-    branches:
-      - main
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   # pull_request_target, not pull_request: this repository takes fork PRs, and a
+#   # `pull_request` run from a fork cannot read the secrets this needs. The usual
+#   # danger of pull_request_target does not apply — this only fires after a
+#   # merge and never checks out or executes any PR code at all.
+#   pull_request_target:
+#     types: [closed]
+#     branches:
+#       - main
+# 
 permissions:
   contents: read
   issues: read

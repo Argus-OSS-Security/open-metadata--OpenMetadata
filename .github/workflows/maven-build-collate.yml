@@ -16,40 +16,41 @@
 # main gets both.
 name: Maven Collate Tests
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "openmetadata-service/**"
-      - "openmetadata-ui/**"
-      - "!openmetadata-ui/src/main/resources/ui/playwright/doc-generator/**"
-      - "!openmetadata-ui/src/main/resources/ui/playwright/docs/**"
-      - "openmetadata-spec/src/main/resources/json/schema/**"
-      - "openmetadata-dist/**"
-      - "openmetadata-clients/**"
-      - "openmetadata-sdk/**"
-      - "openmetadata-integration-tests/**"
-      - "openmetadata-mcp/**"
-      - "common/**"
-      - "pom.xml"
-      - "Makefile"
-      - "bootstrap/**"
-  pull_request_target:
-    types: [opened, synchronize, labeled, ready_for_review]
-    paths:
-      - "openmetadata-service/**"
-      - "openmetadata-ui/src/main/resources/ui/src/**"
-      - "!openmetadata-ui/src/main/resources/ui/src/test/**"
-      - "!openmetadata-ui/src/main/resources/ui/src/**/*.test.ts"
-      - "!openmetadata-ui/src/main/resources/ui/src/**/*.test.tsx"
-      - "openmetadata-spec/src/main/resources/json/schema/**"
-      - "openmetadata-integration-tests/**"
-      - "openmetadata-mcp/**"
-  # merge_group takes no `paths:` filter; the `changes` job applies one in-job instead.
-  merge_group:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - "openmetadata-service/**"
+#       - "openmetadata-ui/**"
+#       - "!openmetadata-ui/src/main/resources/ui/playwright/doc-generator/**"
+#       - "!openmetadata-ui/src/main/resources/ui/playwright/docs/**"
+#       - "openmetadata-spec/src/main/resources/json/schema/**"
+#       - "openmetadata-dist/**"
+#       - "openmetadata-clients/**"
+#       - "openmetadata-sdk/**"
+#       - "openmetadata-integration-tests/**"
+#       - "openmetadata-mcp/**"
+#       - "common/**"
+#       - "pom.xml"
+#       - "Makefile"
+#       - "bootstrap/**"
+#   pull_request_target:
+#     types: [opened, synchronize, labeled, ready_for_review]
+#     paths:
+#       - "openmetadata-service/**"
+#       - "openmetadata-ui/src/main/resources/ui/src/**"
+#       - "!openmetadata-ui/src/main/resources/ui/src/test/**"
+#       - "!openmetadata-ui/src/main/resources/ui/src/**/*.test.ts"
+#       - "!openmetadata-ui/src/main/resources/ui/src/**/*.test.tsx"
+#       - "openmetadata-spec/src/main/resources/json/schema/**"
+#       - "openmetadata-integration-tests/**"
+#       - "openmetadata-mcp/**"
+#   # merge_group takes no `paths:` filter; the `changes` job applies one in-job instead.
+#   merge_group:
+# 
 permissions:
   contents: read
   checks: write

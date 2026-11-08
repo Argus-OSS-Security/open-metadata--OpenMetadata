@@ -10,16 +10,17 @@
 #  limitations under the License.
 
 name: docker-openmetadata-db docker
-on:
-  workflow_dispatch:
-    inputs:
-      docker_release_tag:
-        description: "OpenMetadata MySQL Docker Image Tag"
-        required: true
-      push_latest_tag_to_release:
-        description: "Do you want to update docker image latest tag as well ?"
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       docker_release_tag:
+#         description: "OpenMetadata MySQL Docker Image Tag"
+#         required: true
+#       push_latest_tag_to_release:
+#         description: "Do you want to update docker image latest tag as well ?"
+#         type: boolean
+# 
 permissions:
   contents: read
 
